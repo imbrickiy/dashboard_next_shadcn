@@ -1,3 +1,4 @@
+import Header from '@/components/Header'
 import { ThemeProvider } from '@/components/theme-provider'
 import { cn } from '@/lib/utils'
 import type { Metadata } from 'next'
@@ -19,7 +20,7 @@ export default function RootLayout({
 	children: React.ReactNode
 }>) {
 	return (
-		<html lang='en'>
+		<html lang='en' suppressHydrationWarning>
 			<body
 				className={cn(
 					'min-h-screen bg-background font-sans antialiased',
@@ -32,6 +33,7 @@ export default function RootLayout({
 					enableSystem
 					disableTransitionOnChange
 				>
+					<Header />
 					{children}
 				</ThemeProvider>
 			</body>
