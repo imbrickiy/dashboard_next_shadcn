@@ -1,4 +1,5 @@
 import Header from '@/components/Header'
+import Sidebar from '@/components/Sidebar'
 import { ThemeProvider } from '@/components/theme-provider'
 import { cn } from '@/lib/utils'
 import type { Metadata } from 'next'
@@ -23,7 +24,7 @@ export default function RootLayout({
 		<html lang='en' suppressHydrationWarning>
 			<body
 				className={cn(
-					'min-h-screen bg-background font-sans antialiased',
+					'bg-background flex h-screen overflow-hidden antialiased font-sans',
 					fontSans.variable
 				)}
 			>
@@ -33,8 +34,15 @@ export default function RootLayout({
 					enableSystem
 					disableTransitionOnChange
 				>
-					<Header />
-					{children}
+					<Sidebar />
+
+					<div className='relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden'>
+						<Header />
+
+						<main>
+							<div className='mx-auto max-w-screen-2xl p-4'>{children}</div>
+						</main>
+					</div>
 				</ThemeProvider>
 			</body>
 		</html>
