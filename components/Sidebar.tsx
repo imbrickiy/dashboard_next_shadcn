@@ -1,44 +1,44 @@
 'use client'
 import { cn } from '@/lib/utils'
-import { CalendarIcon, FolderIcon, HomeIcon, UsersIcon } from 'lucide-react'
-import { useState } from 'react'
-import { Icons } from './icons'
+import { CalendarIcon, FolderIcon, Inbox, Plus, Table, UsersIcon } from 'lucide-react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Button } from './ui/button'
 
 const navigation = [
-	{ name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-	{ name: 'Team', href: '#', icon: UsersIcon, current: false },
-	{ name: 'Projects', href: '#', icon: FolderIcon, current: false },
-	{ name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
+	{ name: 'Dashboard', href: '/', icon: Plus, current: true },
+	{ name: 'Table', href: '/team', icon: Table, current: false },
+	{ name: 'Projects', href: '/project', icon: FolderIcon, current: false },
+	{ name: 'Calendar', href: '/calendar', icon: CalendarIcon, current: false },
 ]
 
 export default function Home() {
-	const defaultLayout = [265, 440, 655]
-	const defaultCollapsed = false
-	const [isCollapsed, setIsCollapsed] = useState(defaultCollapsed)
+	const path = usePathname()
+	if (typeof path !== 'string') return null
 	return (
 		<div className='flex h-screen border-r'>
-			<div className='flex-1 flex flex-col overflow-y-auto items-center '>
-				<Icons.tailwind className='size-8 m-3' />
-				<nav className='p-2 space-y-1'>
+			<div className='flex-1 flex flex-col overflow-y-auto items-center'>
+				<nav className=' mt-16'>
 					{navigation.map(item => (
-						<Button
+						<Link
 							key={item.name}
-							variant={'ghost'}
-							className={cn(
-								'group flex items-center px-2 py-2 text-sm font-medium text-gray-900 rounded-md',
-								{
-									'bg-gray-100': item.current,
-								}
-							)}
+							href={item.href}
+							className='flex items-center p-2'
 						>
-							<item.icon
+							<div
 								className={cn(
-									'flex-shrink-0 h-6 w-6 text-gray-300 group-hover:text-gray-500'
+									' w-9 h-9 rounded-md flex items-center justify-center  hover:bg-gray-100 transition-colors duration-200',
+									path === item.href &&'bg-black hover:bg-black'
 								)}
-								aria-hidden='true'
-							/>
-						</Button>
+							>
+								<item.icon
+									className={cn(
+										'flex-shrink-0 h-4 w-4 text-gray-400'
+									)}
+									aria-hidden='true'
+								/>
+							</div>
+						</Link>
 					))}
 				</nav>
 			</div>
