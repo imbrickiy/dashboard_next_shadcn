@@ -33,9 +33,9 @@ export default function Home() {
 							>
 								<item.icon
 									className={cn(
-										'flex-shrink-0 h-4 w-4 text-gray-400'
+										'flex-shrink-0 h-4 w-4 text-gray-400',
+									path === item.href &&'bg-black text-white'
 									)}
-									aria-hidden='true'
 								/>
 							</div>
 						</Link>

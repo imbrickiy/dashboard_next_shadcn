@@ -2,6 +2,7 @@ import Header from '@/components/Header'
 import Sidebar from '@/components/Sidebar'
 import { ThemeProvider } from '@/components/theme-provider'
 import { cn } from '@/lib/utils'
+import { ArrowRight } from 'lucide-react'
 import type { Metadata } from 'next'
 import { Inter as FontSans } from 'next/font/google'
 import './globals.css'
@@ -24,7 +25,7 @@ export default function RootLayout({
 		<html lang='en' suppressHydrationWarning>
 			<body
 				className={cn(
-					'bg-background flex h-screen overflow-hidden antialiased font-sans',
+					'bg-background flex h-screen overflow-hidden antialiased font-sans relative',
 					fontSans.variable
 				)}
 			>
@@ -36,11 +37,15 @@ export default function RootLayout({
 				>
 					<Sidebar />
 
-					<div className='relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden'>
+					<div className=' flex flex-1 flex-col overflow-y-auto overflow-x-hidden'>
 						<Header />
 
 						<main>
-							<div className='mx-auto max-w-screen-2xl p-4'>{children}</div>
+							<div className='mx-auto max-w-screen-2xl p-4'>
+								<div className='overflow-auto rounded-[0.5rem] bg-background'>
+									{children}
+								</div>
+							</div>
 						</main>
 					</div>
 				</ThemeProvider>
